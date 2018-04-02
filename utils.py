@@ -24,3 +24,12 @@ def get_mac_addresses():
             addresses.append(open(addr_file, 'rb').read())
         break
     return sorted(addresses)
+
+
+def get_computer_id():
+    try:
+        with open('/var/lib/dbus/machine-id', 'rb') as f:
+            cid = f.read()
+    except IOError:
+        cid = get_mac_addresses()
+    return cid
