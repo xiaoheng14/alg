@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+import os
+
 FALSE_STRINGS = ('0', 'F', 'FALSE', 'N', 'NO')
 
 
@@ -8,3 +11,16 @@ def to_bool(value):
         return False
     return bool(value)
 
+
+def get_mac_addresses():
+    addresses = []
+    sys_class_net = "/sys/class/net"
+    interfaces = os.walk(sys_class_net)
+    for root, ifaces, files in os.walk(sys_class_net):
+        for iface in ifaces:
+            if iface == "lo": # skip loopback
+                continue
+            addr_file = os.path.join(sys_class_net, iface, "address")
+            addresses.append(open(addr_file, 'rb').read())
+        break
+    return sorted(addresses)
