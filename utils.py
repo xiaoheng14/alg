@@ -33,3 +33,6 @@ def get_computer_id():
     except IOError:
         cid = get_mac_addresses()
     return cid
+
+from pwd import getpwnam
+print getpwnam('ub')
