@@ -11,7 +11,7 @@ def binary_search(list, item):
             high = mid -1
         else:
             low = mid + 1
-    return None
+    return -1
 
 if __name__ == '__main__':
     my_list = [1, 3, 5, 7, 9]
